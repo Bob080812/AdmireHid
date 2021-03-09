@@ -6,6 +6,7 @@
         <module>common</module>
         <module>service_base</module>
         <module>security</module>
+        <module>infrastructure</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

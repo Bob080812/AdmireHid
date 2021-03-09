@@ -9,11 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
+    <artifactId>infrastructure</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>service_base</module>
-        <module>spring_security</module>
+        <module>api_gateway</module>
     </modules>
 
     <properties>
