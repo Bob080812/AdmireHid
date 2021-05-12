@@ -1,4 +1,4 @@
-package com.admire.secyrity.security;
+package com.admire.security.security;
 
 import com.admire.common.domain.ReturnValue;
 
@@ -30,6 +30,6 @@ public class TokenLogoutHandler implements LogoutHandler {
             //从redis中删除
             redisTemplate.delete(username);
         }
-        ResponseUtil.out(response, ReturnValue.success());
+        ResponseUtil.out(response, ReturnValue.ok());
     }
 }

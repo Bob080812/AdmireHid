@@ -1,12 +1,12 @@
-package com.admire.secyrity.config;
+package com.admire.security.config;
 
 
-import com.admire.secyrity.fileter.TokenAuthFilter;
-import com.admire.secyrity.fileter.TokenLoginFilter;
-import com.admire.secyrity.security.DefaultPasswordEncoder;
-import com.admire.secyrity.security.TokenLogoutHandler;
-import com.admire.secyrity.security.TokenManager;
-import com.admire.secyrity.security.UnauthEntryPoint;
+import com.admire.security.fileter.TokenAuthFilter;
+import com.admire.security.fileter.TokenLoginFilter;
+import com.admire.security.security.DefaultPasswordEncoder;
+import com.admire.security.security.TokenLogoutHandler;
+import com.admire.security.security.TokenManager;
+import com.admire.security.security.UnauthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -4,164 +4,92 @@ import com.admire.common.constant.HttpStatus;
 import com.admire.common.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class ReturnValue extends HashMap<String, Object> {
-    private static final long serialVersionUID = 1L;
+public class ReturnValue  {
 
-    /** 状态码 */
-    public static final String CODE_TAG = "code";
+    private Boolean success;
 
-    /** 返回内容 */
-    public static final String MSG_TAG = "msg";
+    private Integer code;
 
-    /** 数据对象 */
-    public static final String DATA_TAG = "data";
+    private String message;
 
-    /**
-     * 初始化一个新创建的 ReturnValue 对象，使其表示一个空消息。
-     */
-    public ReturnValue()
-    {
+    private Map<String, Object> returnData = new HashMap<String, Object>();
+
+    public Boolean getSuccess() {
+        return success;
     }
 
-    /**
-     * 初始化一个新创建的 ReturnValue 对象
-     *
-     * @param code 状态码
-     * @param msg 返回内容
-     */
-    public ReturnValue(int code, String msg)
-    {
-        super.put(CODE_TAG, code);
-        super.put(MSG_TAG, msg);
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 
-    /**
-     * 初始化一个新创建的 ReturnValue 对象
-     *
-     * @param code 状态码
-     * @param msg 返回内容
-     * @param data 数据对象
-     */
-    public ReturnValue(int code, String msg, Object data)
-    {
-        super.put(CODE_TAG, code);
-        super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data))
-        {
-            super.put(DATA_TAG, data);
-        }
-    }
-    /**
-     * 初始化一个新创建的 ReturnValue 对象
-     *
-     * @param code 状态码
-     * @param msg 返回内容
-     * @param data 数据对象
-     */
-    public ReturnValue(int code, String msg,String key, Object data)
-    {
-        super.put(CODE_TAG, code);
-        super.put(MSG_TAG, msg);
-        if (StringUtils.isNotNull(data))
-        {
-            super.put(key, data);
-        }
-    }
-    /**
-     * 返回成功消息
-     *
-     * @return 成功消息
-     */
-    public static ReturnValue success()
-    {
-        return ReturnValue.success("操作成功");
+    public Integer getCode() {
+        return code;
     }
 
-    /**
-     * 返回成功数据
-     *
-     * @return 成功消息
-     */
-    public static ReturnValue success(Object data)
-    {
-        return ReturnValue.success("操作成功", data);
-    }
-    /**
-     * 返回成功数据
-     *
-     * @return 成功消息
-     */
-    public static ReturnValue success(String msg,String key,Object data)
-    {
-        return new ReturnValue(HttpStatus.SUCCESS, msg, key,data);
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    /**
-     * 返回成功消息
-     *
-     * @param msg 返回内容
-     * @return 成功消息
-     */
-    public static ReturnValue success(String msg)
-    {
-        return ReturnValue.success(msg, null);
+    public String getMessage() {
+        return message;
     }
 
-    /**
-     * 返回成功消息
-     *
-     * @param msg 返回内容
-     * @param data 数据对象
-     * @return 成功消息
-     */
-    public static ReturnValue success(String msg, Object data)
-    {
-        return new ReturnValue(HttpStatus.SUCCESS, msg, data);
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    /**
-     * 返回错误消息
-     *
-     * @return
-     */
-    public static ReturnValue error()
-    {
-        return ReturnValue.error("操作失败");
+    public Map<String, Object> getReturnData() {
+        return returnData;
     }
 
-    /**
-     * 返回错误消息
-     *
-     * @param msg 返回内容
-     * @return 警告消息
-     */
-    public static ReturnValue error(String msg)
-    {
-        return ReturnValue.error(msg, null);
+    public void setReturnData(Map<String, Object> returnData) {
+        this.returnData = returnData;
     }
 
-    /**
-     * 返回错误消息
-     *
-     * @param msg 返回内容
-     * @param data 数据对象
-     * @return 警告消息
-     */
-    public static ReturnValue error(String msg, Object data)
-    {
-        return new ReturnValue(HttpStatus.ERROR, msg, data);
+    private ReturnValue(){}
+
+    //成功静态方法
+    public static ReturnValue ok() {
+        ReturnValue returnValue = new ReturnValue();
+        returnValue.setSuccess(true);
+        returnValue.setCode(200);
+        returnValue.setMessage("成功");
+        return returnValue;
     }
 
-    /**
-     * 返回错误消息
-     *
-     * @param code 状态码
-     * @param msg 返回内容
-     * @return 警告消息
-     */
-    public static ReturnValue error(int code, String msg)
-    {
-        return new ReturnValue(code, msg, null);
+    //失败静态方法
+    public static ReturnValue error() {
+        ReturnValue returnValue = new ReturnValue();
+        returnValue.setSuccess(false);
+        returnValue.setCode(201);
+        returnValue.setMessage("失败");
+        return returnValue;
+    }
+
+    public ReturnValue success(Boolean success){
+        this.setSuccess(success);
+        return this;
+    }
+
+    public ReturnValue message(String message){
+        this.setMessage(message);
+        return this;
+    }
+
+    public ReturnValue code(Integer code){
+        this.setCode(code);
+        return this;
+    }
+
+    public ReturnValue data(String key, Object value){
+        this.returnData.put(key, value);
+        return this;
+    }
+
+    public ReturnValue data(Map<String, Object> map){
+        this.setReturnData(map);
+        return this;
     }
 }

@@ -1,4 +1,4 @@
-package com.admire.secyrity.domain;
+package com.admire.security.domain;
 
 /**
  * @author lx

@@ -1,4 +1,4 @@
-package com.admire.secyrity.security;
+package com.admire.security.security;
 
 import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jwts;

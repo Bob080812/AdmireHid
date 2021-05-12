@@ -1,4 +1,4 @@
-package com.admire.secyrity.domain;
+package com.admire.security.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package com.admire.secyrity.security;
+package com.admire.security.security;
 
 import com.admire.common.domain.ReturnValue;
 import com.admire.common.util.ResponseUtil;

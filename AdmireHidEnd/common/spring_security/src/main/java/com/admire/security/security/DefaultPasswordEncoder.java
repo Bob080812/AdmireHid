@@ -1,7 +1,6 @@
-package com.admire.secyrity.security;
+package com.admire.security.security;
 
 import cn.hutool.crypto.SecureUtil;
-import io.netty.util.internal.StringUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
