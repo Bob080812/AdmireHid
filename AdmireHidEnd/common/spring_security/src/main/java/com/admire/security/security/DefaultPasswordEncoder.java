@@ -1,6 +1,6 @@
 package com.admire.security.security;
 
-import com.admire.utils.utils.MD5;
+import cn.hutool.crypto.SecureUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
      */
     @Override
     public String encode(CharSequence rawPassword) {
-        return MD5.encrypt(rawPassword.toString());
+        return SecureUtil.md5(rawPassword.toString());
     }
 
     /**
@@ -35,6 +35,6 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
      */
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return encodedPassword.equals(MD5.encrypt(rawPassword.toString()));
+        return encodedPassword.equals(SecureUtil.md5(rawPassword.toString()));
     }
 }

@@ -1,7 +1,7 @@
 package com.admire.service.controller;
 
 import com.admire.service.service.IndexService;
-import com.admire.utils.utils.R;
+import com.admire.utils.utils.ReturnValue;
 import com.alibaba.fastjson.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +23,11 @@ public class IndexController {
      * 根据token获取用户信息
      */
     @GetMapping("info")
-    public R info(){
+    public ReturnValue info(){
         //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Map<String, Object> userInfo = indexService.getUserInfo(username);
-        return R.ok().data(userInfo);
+        return ReturnValue.ok().data(userInfo);
     }
 
     /**
@@ -35,16 +35,16 @@ public class IndexController {
      * @return
      */
     @GetMapping("menu")
-    public R getMenu(){
+    public ReturnValue getMenu(){
         //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<JSONObject> permissionList = indexService.getMenu(username);
-        return R.ok().data("permissionList", permissionList);
+        return ReturnValue.ok().data("permissionList", permissionList);
     }
 
     @PostMapping("logout")
-    public R logout(){
-        return R.ok();
+    public ReturnValue logout(){
+        return ReturnValue.ok();
     }
 
 }

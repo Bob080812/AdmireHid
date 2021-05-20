@@ -2,11 +2,11 @@ package com.admire.service.controller;
 
 
 
+import cn.hutool.crypto.SecureUtil;
 import com.admire.service.entity.User;
 import com.admire.service.service.RoleService;
 import com.admire.service.service.UserService;
-import com.admire.utils.utils.R;
-import com.admire.utils.utils.*;
+import com.admire.utils.utils.ReturnValue;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +39,7 @@ public class UserController {
 
     @ApiOperation(value = "获取管理用户分页列表")
     @GetMapping("{page}/{limit}")
-    public R index(
+    public ReturnValue index(
             @ApiParam(name = "page", value = "当前页码", required = true)
             @PathVariable Long page,
 
@@ -56,29 +55,29 @@ public class UserController {
         }
 
         IPage<User> pageModel = userService.page(pageParam, wrapper);
-        return R.ok().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
+        return ReturnValue.ok().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
     }
 
     @ApiOperation(value = "新增管理用户")
     @PostMapping("save")
-    public R save(@RequestBody User user) {
-        user.setPassword(MD5.encrypt(user.getPassword()));
+    public ReturnValue save(@RequestBody User user) {
+        user.setPassword(SecureUtil.md5(user.getPassword()));
         userService.save(user);
-        return R.ok();
+        return ReturnValue.ok();
     }
 
     @ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
-    public R toAssign(@PathVariable String userId) {
+    public ReturnValue toAssign(@PathVariable String userId) {
         Map<String, Object> roleMap = roleService.findRoleByUserId(userId);
-        return R.ok().data(roleMap);
+        return ReturnValue.ok().data(roleMap);
     }
 
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
-    public R doAssign(@RequestParam String userId,@RequestParam String[] roleId) {
+    public ReturnValue doAssign(@RequestParam String userId, @RequestParam String[] roleId) {
         roleService.saveUserRoleRealtionShip(userId,roleId);
-        return R.ok();
+        return ReturnValue.ok();
     }
 }
 

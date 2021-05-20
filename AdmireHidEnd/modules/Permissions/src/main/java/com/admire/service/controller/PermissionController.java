@@ -4,7 +4,7 @@ package com.admire.service.controller;
 
 import com.admire.service.entity.Permission;
 import com.admire.service.service.PermissionService;
-import com.admire.utils.utils.R;
+import com.admire.utils.utils.ReturnValue;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,23 +30,23 @@ public class PermissionController {
     //获取全部菜单
     @ApiOperation(value = "查询所有菜单")
     @GetMapping
-    public R indexAllPermission() {
+    public ReturnValue indexAllPermission() {
         List<Permission> list =  permissionService.queryAllMenu();
-        return R.ok().data("children",list);
+        return ReturnValue.ok().data("children",list);
     }
 
     @ApiOperation(value = "给角色分配权限")
     @PostMapping("/doAssign")
-    public R doAssign(String roleId,String[] permissionId) {
+    public ReturnValue doAssign(String roleId, String[] permissionId) {
         permissionService.saveRolePermissionRealtionShipGuli(roleId,permissionId);
-        return R.ok();
+        return ReturnValue.ok();
     }
 
     @ApiOperation(value = "根据角色获取菜单")
     @GetMapping("toAssign/{roleId}")
-    public R toAssign(@PathVariable String roleId) {
+    public ReturnValue toAssign(@PathVariable String roleId) {
         List<Permission> list = permissionService.selectAllMenu(roleId);
-        return R.ok().data("children", list);
+        return ReturnValue.ok().data("children", list);
     }
 
 }

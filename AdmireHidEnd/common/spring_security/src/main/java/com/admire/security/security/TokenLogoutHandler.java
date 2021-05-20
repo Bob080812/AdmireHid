@@ -1,6 +1,6 @@
 package com.admire.security.security;
 
-import com.admire.utils.utils.R;
+import com.admire.utils.utils.ReturnValue;
 import com.admire.utils.utils.ResponseUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
@@ -34,6 +34,6 @@ public class TokenLogoutHandler implements LogoutHandler {
             //从redis中删除
             redisTemplate.delete(username);
         }
-        ResponseUtil.out(response, R.ok());
+        ResponseUtil.out(response, ReturnValue.ok());
     }
 }

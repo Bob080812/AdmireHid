@@ -5,7 +5,7 @@ package com.admire.service.controller;
 import com.admire.service.entity.Role;
 import com.admire.service.service.RoleService;
 
-import com.admire.utils.utils.R;
+import com.admire.utils.utils.ReturnValue;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
@@ -13,8 +13,6 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -34,7 +32,7 @@ public class RoleController {
 
     @ApiOperation(value = "获取角色分页列表")
     @GetMapping("{page}/{limit}")
-    public R index(
+    public ReturnValue index(
             @ApiParam(name = "page", value = "当前页码", required = true)
             @PathVariable Long page,
 
@@ -47,14 +45,14 @@ public class RoleController {
             wrapper.like("role_name",role.getRoleName());
         }
         roleService.page(pageParam,wrapper);
-        return R.ok().data("items", pageParam.getRecords()).data("total", pageParam.getTotal());
+        return ReturnValue.ok().data("items", pageParam.getRecords()).data("total", pageParam.getTotal());
     }
 
     @ApiOperation(value = "新增角色")
     @PostMapping("save")
-    public R save(@RequestBody Role role) {
+    public ReturnValue save(@RequestBody Role role) {
         roleService.save(role);
-        return R.ok();
+        return ReturnValue.ok();
     }
 }
 

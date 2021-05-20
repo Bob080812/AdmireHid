@@ -7,7 +7,7 @@ import java.util.Map;
 
 //统一返回结果的类
 @Data
-public class R {
+public class ReturnValue {
 
     private Boolean success;
 
@@ -18,11 +18,11 @@ public class R {
     private Map<String, Object> data = new HashMap<String, Object>();
 
     //把构造方法私有
-    private R() {}
+    private ReturnValue() {}
 
     //成功静态方法
-    public static R ok() {
-        R r = new R();
+    public static ReturnValue ok() {
+        ReturnValue r = new ReturnValue();
         r.setSuccess(true);
         r.setCode(20000);
         r.setMessage("成功");
@@ -30,35 +30,35 @@ public class R {
     }
 
     //失败静态方法
-    public static R error() {
-        R r = new R();
+    public static ReturnValue error() {
+        ReturnValue r = new ReturnValue();
         r.setSuccess(false);
         r.setCode(20001);
         r.setMessage("失败");
         return r;
     }
 
-    public R success(Boolean success){
+    public ReturnValue success(Boolean success){
         this.setSuccess(success);
         return this;
     }
 
-    public R message(String message){
+    public ReturnValue message(String message){
         this.setMessage(message);
         return this;
     }
 
-    public R code(Integer code){
+    public ReturnValue code(Integer code){
         this.setCode(code);
         return this;
     }
 
-    public R data(String key, Object value){
+    public ReturnValue data(String key, Object value){
         this.data.put(key, value);
         return this;
     }
 
-    public R data(Map<String, Object> map){
+    public ReturnValue data(Map<String, Object> map){
         this.setData(map);
         return this;
     }
