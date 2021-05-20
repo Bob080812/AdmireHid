@@ -1,6 +1,5 @@
 package com.admire.security.config;
 
-
 import com.admire.security.fileter.TokenAuthFilter;
 import com.admire.security.fileter.TokenLoginFilter;
 import com.admire.security.security.DefaultPasswordEncoder;
@@ -8,15 +7,22 @@ import com.admire.security.security.TokenLogoutHandler;
 import com.admire.security.security.TokenManager;
 import com.admire.security.security.UnauthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-        /**
-        * 核心配置类
-        */
+
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+/**
+ * 核心配置类
+ */
 public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private TokenManager tokenManager;

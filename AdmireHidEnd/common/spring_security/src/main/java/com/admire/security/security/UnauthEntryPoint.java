@@ -1,7 +1,7 @@
 package com.admire.security.security;
 
-import com.admire.common.domain.ReturnValue;
-import com.admire.common.util.ResponseUtil;
+import com.admire.utils.utils.R;
+import com.admire.utils.utils.ResponseUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -12,11 +12,11 @@ import java.io.IOException;
 
 /**
  * 未授权统一处理类
- * @author lx
  */
 public class UnauthEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        ResponseUtil.out(response, ReturnValue.error());
+        System.out.println("没有权限处理");
+        ResponseUtil.out(response, R.error());
     }
 }

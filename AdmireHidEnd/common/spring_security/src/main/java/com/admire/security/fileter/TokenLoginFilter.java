@@ -1,11 +1,10 @@
 package com.admire.security.fileter;
 
-
-import com.admire.common.domain.ReturnValue;
-import com.admire.common.util.ResponseUtil;
-import com.admire.security.domain.SecurityUser;
-import com.admire.security.domain.User;
+import com.admire.security.Entity.SecurityUser;
+import com.admire.security.Entity.User;
 import com.admire.security.security.TokenManager;
+import com.admire.utils.utils.R;
+import com.admire.utils.utils.ResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -85,7 +84,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         //把用户名称和用户权限列表放到redis
         redisTemplate.opsForValue().set(user.getCurrentUserInfo().getUsername(),user.getPermissionValueList());
         //返回token
-        ResponseUtil.out(response, ReturnValue.ok().data("token",token));
+        ResponseUtil.out(response, R.ok().data("token",token));
     }
 
     /**
@@ -99,6 +98,6 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
             throws IOException, ServletException {
-        ResponseUtil.out(response, ReturnValue.error());
+        ResponseUtil.out(response, R.error());
     }
 }
